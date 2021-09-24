@@ -1,9 +1,9 @@
 // ==UserScript==
 // @name         动态视力
-// @namespace    http://tampermonkey.net/
-// @version      0.1
-// @description  try to take over the world!
-// @author       TangerineJuice
+// @namespace    https://github.com/SiyaoHuang/DynamicVisual
+// @version      0.12
+// @description  bilibili逐帧播放
+// @author       @SiyaoHuang
 // @match        https://www.bilibili.com/video/*
 // @icon         https://www.google.com/s2/favicons?domain=bilibili.com
 // @grant        none
