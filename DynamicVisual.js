@@ -1,6 +1,7 @@
 // ==UserScript==
 // @name         动态视力
 // @namespace    https://github.com/SiyaoHuang/DynamicVisual
+// @homepage     https://github.com/SiyaoHuang/DynamicVisual
 // @version      0.12
 // @description  bilibili逐帧播放
 // @author       @SiyaoHuang
@@ -11,17 +12,25 @@
 
 (function() {
     'use strict';
-    function moveForward(video){
-        var c = video.currentTime;
-        var c0 = video.currentTime;
-        var x = 0.017;
-        while(c == c0){
-            video.currentTime = c0 + x;
-            c = video.currentTIme;
-            x += 0.017;
+    var video = undefined;
+    function moveForward(t, x){
+        //console.log(t, video.currentTime, x)
+        if(t === undefined){
+            t = video.currentTime;
         }
+        if(t < video.currentTime){
+            return;
+        }
+        if(x == undefined){
+            x = 0.017;
+        }
+        video.currentTime = t + x;
+        x += 0.017;
+        setTimeout(function(){
+            moveForward(t, x);
+        }, 500);
     }
-    function moveBackward(video){
+    function moveBackward(){
         var c = video.currentTime;
         var c0 = video.currentTime;
         var x = 0.017;
@@ -54,7 +63,7 @@
         }
         console.log("get vido 0");
 
-        var video = vids[0];
+        video = vids[0];
         console.log(video);
         var plays = document.getElementsByClassName('bilibili-player-video-btn');
         if(plays.length == 0) {
@@ -84,7 +93,7 @@
         setStyle(nextButton2, 'rgb(249 120 120 / 38%)', 1);
         nextButton2.onclick = function(e) {
             //video.pause();
-            moveForward(video);
+            moveForward();
             e.stopPropagation();
 
             /*
