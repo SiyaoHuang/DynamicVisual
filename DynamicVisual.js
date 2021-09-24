@@ -5,7 +5,18 @@
 // @version      0.12
 // @description  bilibili逐帧播放
 // @author       @SiyaoHuang
-// @match        https://www.bilibili.com/video/*
+// @include      *://www.bilibili.com/video/av*
+// @include      *://www.bilibili.com/video/BV*
+// @include      *://www.bilibili.com/bangumi/play/ep*
+// @include      *://www.bilibili.com/bangumi/play/ss*
+// @include      *://m.bilibili.com/bangumi/play/ep*
+// @include      *://m.bilibili.com/bangumi/play/ss*
+// @include      *://bangumi.bilibili.com/anime/*
+// @include      *://bangumi.bilibili.com/movie/*
+// @include      *://www.bilibili.com/bangumi/media/md*
+// @include      *://www.bilibili.com/blackboard/html5player.html*
+// @include      *://www.bilibili.com/watchroom/*
+// @include      *://space.bilibili.com/11783021*
 // @icon         https://www.google.com/s2/favicons?domain=bilibili.com
 // @grant        none
 // ==/UserScript==
