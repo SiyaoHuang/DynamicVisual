@@ -1,10 +1,10 @@
 // ==UserScript==
-// @name         动态视力
+// @name         Dynamic Visual
 // @namespace    https://github.com/SiyaoHuang/DynamicVisual
 // @homepage     https://github.com/SiyaoHuang/DynamicVisual
 // @version      0.12
 // @description  bilibili逐帧播放
-// @author       @SiyaoHuang
+// @author       SiyaoHuang
 // @include      *://www.bilibili.com/video/av*
 // @include      *://www.bilibili.com/video/BV*
 // @include      *://www.bilibili.com/bangumi/play/ep*
@@ -24,7 +24,11 @@
 (function() {
     'use strict';
     var video = undefined;
+    var slow = false;
     function moveForward(t, x){
+        if(slow){
+            video.currentTime = video.currentTime + 0.1;
+        }
         //console.log(t, video.currentTime, x)
         if(t === undefined){
             t = video.currentTime;
@@ -41,15 +45,24 @@
             moveForward(t, x);
         }, 500);
     }
-    function moveBackward(){
-        var c = video.currentTime;
-        var c0 = video.currentTime;
-        var x = 0.017;
-        while(c == c0){
-            video.currentTime = c0 - x;
-            c = video.currentTIme;
-            x += 0.017;
+    function moveBackward(t, x){
+        if(slow){
+            video.currentTime = video.currentTime - 0.1;
         }
+        if(t === undefined){
+            t = video.currentTime;
+        }
+        if(t > video.currentTime){
+            return;
+        }
+        if(x == undefined){
+            x = 0.017;
+        }
+        video.currentTime = t - x;
+        x += 0.017;
+        setTimeout(function(){
+            moveBackward(t, x);
+        }, 500);
     }
 
     function setStyle(button, color, i){
@@ -87,7 +100,7 @@
         setStyle(nextButton, 'rgb(249 120 120 / 38%)', 0);
         nextButton.onclick = function(e) {
             //video.pause();
-            moveBackward(video);
+            moveBackward();
             /*
             console.log(video.currentTime );
             var target = video.currentTime - frameTime;
